@@ -14,15 +14,41 @@ export class Invention {
 
 export class InventionsComponent implements OnInit {
 
-  invention: Invention = {
-    name: 'Linguagem C',
-    inventor: 'Dennis Ritchie',
-    year: '1972'
+  nameModel: String;
+  inventorModel: String;
+  yearModel: String;
+  inventions: Invention[];
+
+  
+
+  constructor() { 
+    this.nameModel = '';
+    this.inventorModel = '';
+    this.yearModel = '';
+
+    let defaultInvention: Invention = {
+      name: 'Linguagem C',
+      inventor: 'Dennis Ritchie',
+      year: '1972'
+    };
+
+    this.inventions = [ defaultInvention ];
   }
 
-  constructor() { }
-
   ngOnInit() {
+  }
+
+  createInvention() {
+
+    let newInvention: Invention = {
+      name: this.nameModel,
+      inventor: this.inventorModel, 
+      year: this.yearModel
+    };
+
+    this.inventions.push(newInvention);
+
+    this.nameModel = this.yearModel = this.inventorModel = '';
   }
 
 }
