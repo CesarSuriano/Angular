@@ -1,13 +1,16 @@
-<li *ngFor="let i of inventions">
+<div *ngFor="let i of inventions">
     <div class="invention">
         <span>
-            <b>Name: </b> {{i.name}} || </span>
+            <b> Name: </b> {{ i.name }} || </span>
         <span>
-            <b>Inventor: </b> {{i.inventor}} || </span>
+            <b> Inventor: </b> {{ i.inventor }} || </span>
         <span>
-            <b>Year: </b> {{i.year}} || </span>
+            <b> Year: </b> {{ i.year }} </span>
+        <span>
+            <button class="btn btn-primary" (click)="details(i.id)"> details </button>
+        </span>
     </div>
-</li>
+</div>
 
 <hr>
 

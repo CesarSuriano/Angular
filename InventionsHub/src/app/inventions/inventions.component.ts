@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
-export class Invention {
-  name: String;
-  inventor: String;
-  year: String;
-}
+import { Invention } from './inventions.class';
+import { InventionsService } from './inventions.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inventions',
   templateUrl: './inventions.component.html',
-  styleUrls: ['./inventions.component.css']
+  styleUrls: ['./inventions.component.css'],
+  providers: [InventionsService]
 })
 
 export class InventionsComponent implements OnInit {
@@ -18,21 +16,19 @@ export class InventionsComponent implements OnInit {
   inventorModel: String;
   yearModel: String;
   inventions: Invention[];
+  detailsModel: String;
+  totalInventions: number;
 
-  
 
-  constructor() { 
+
+  constructor(private inventionsService: InventionsService, private router: Router) {
     this.nameModel = '';
     this.inventorModel = '';
     this.yearModel = '';
-
-    let defaultInvention: Invention = {
-      name: 'Linguagem C',
-      inventor: 'Dennis Ritchie',
-      year: '1972'
-    };
-
-    this.inventions = [ defaultInvention ];
+    this.detailsModel = '';
+    this.inventions = inventionsService.getInventions();
+    this.totalInventions = this.inventions.length;
+    
   }
 
   ngOnInit() {
@@ -40,15 +36,26 @@ export class InventionsComponent implements OnInit {
 
   createInvention() {
 
+    this.totalInventions += 1;
     let newInvention: Invention = {
+      id: this.getId(),
       name: this.nameModel,
-      inventor: this.inventorModel, 
-      year: this.yearModel
+      inventor: this.inventorModel,
+      year: this.yearModel,
+      details: this.detailsModel
     };
 
     this.inventions.push(newInvention);
 
     this.nameModel = this.yearModel = this.inventorModel = '';
+  }
+
+  details(id) {
+    this.router.navigate(['/details', id]);
+  }
+
+  getId() {
+    return this.totalInventions;
   }
 
 }
