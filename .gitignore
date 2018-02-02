@@ -66,6 +66,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-/todo-spring-mongo
-todo-spring-mongo
-todo-spring-mongo/*
